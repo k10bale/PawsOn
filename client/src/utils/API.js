@@ -2,19 +2,31 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  getBooks: function() {
-    return axios.get("/api/books");
+  getOwner: function() {
+    return axios.get("/api/owner");
+  },
+  getPets: function() {
+    return axios.get("/api/pets");
   },
   // Gets the book with the given id
-  getBook: function(id) {
-    return axios.get("/api/books/" + id);
+  getOwner: function(id) {
+    return axios.get("/api/owner/" + id);
+  },
+  getPets: function(id) {
+    return axios.get("/api/pets/" + id);
   },
   // Deletes the book with the given id
-  deleteBook: function(id) {
-    return axios.delete("/api/books/" + id);
+  deleteOwner: function(id) {
+    return axios.delete("/api/owner/" + id);
+  },
+  deletePets: function(id) {
+    return axios.delete("/api/pets/" + id);
   },
   // Saves a book to the database
-  saveBook: function(bookData) {
-    return axios.post("/api/books", bookData);
+  saveOwner: function(ownerData) {
+    return axios.post("/api/owner", ownerData);
+  },
+  savePet: function(petData) {
+    return axios.post("/api/pets", petData);
   }
 };
