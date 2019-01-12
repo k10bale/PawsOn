@@ -56,11 +56,11 @@ class Login extends Component {
           />
           <button onClick={this.handleFormSubmit}>Submit</button>
           <Link to="/signup/">
-				<button
-				type="button"
-				className="btn btn-outline-success btn-sm">
-				Register
-		</button>
+				  <button
+				      type="button"
+				      className="btn btn-outline-success btn-sm">
+				      Register
+		    </button>
 		    </Link>
         </form>
       </div>
