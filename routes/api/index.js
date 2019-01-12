@@ -1,7 +1,10 @@
 const router = require("express").Router();
-const bookRoutes = require("./books");
+const ownerRoutes = require("./owner");
+const petRoutes = require("./pets");
 
-// Book routes
-router.use("/books", bookRoutes);
+// yarn routes
+router.use("/owner", ownerRoutes);
+router.use("/pets", petRoutes);
+
 
 module.exports = router;
