@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 // import "./style.css";
 
 class Login extends Component {
@@ -54,6 +55,13 @@ class Login extends Component {
             placeholder="password"
           />
           <button onClick={this.handleFormSubmit}>Submit</button>
+          <Link to="/signup/">
+				  <button
+				      type="button"
+				      className="btn btn-outline-success btn-sm">
+				      Register
+		    </button>
+		    </Link>
         </form>
       </div>
     );
