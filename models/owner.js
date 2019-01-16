@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ownerSchema = new Schema({
-  title: { type: String, required: true },
-  author: { type: String, required: true },
-  synopsis: String,
-  date: { type: Date, default: Date.now }
+  firstName: { type: String },
+  lastName: { type: String},
+  email: { type: String },
+  password: { type: String },
+  confirmPassword: { type: String }
 });
 
 const Owner = mongoose.model("Owner", ownerSchema);

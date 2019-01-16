@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import { Col, Container } from "../components/Grid";
 // import Jumbotron from "../components/Jumbotron";
-// import API from "../utils/API";
+import API from "../utils/API";
 
 class Owner extends Component {
   state = {
@@ -24,6 +24,18 @@ class Owner extends Component {
     });
   };
 
+  addUser = event => {
+
+    API.saveOwner({
+      firstName:this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password,
+      confirmPassword: this.state.confirmPassword
+ 
+ }) 
+};
+
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
@@ -36,6 +48,8 @@ class Owner extends Component {
       confirmPassword: ""
     });
   };
+
+
 
   render() {
     return (
@@ -81,7 +95,7 @@ class Owner extends Component {
             type="text"
             placeholder="Confirm Password"
           />
-          <button onClick={this.handleFormSubmit}>Submit</button>
+          <button onClick={this.addUser}>Submit</button>
         </form>
       </div>
       </Col>
