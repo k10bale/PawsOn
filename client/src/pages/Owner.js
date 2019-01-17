@@ -1,17 +1,21 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Col, Container } from "../components/Grid";
-// import Jumbotron from "../components/Jumbotron";
+import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
+import DeleteBtn from "../components/DeleteBtn";
+import { List, ListItem } from "../components/List";
 
 class Owner extends Component {
   state = {
+        owners: [],
         firstName: "",
         lastName: "",
         email: "",
         password:"",
         confirmPassword: ""
   };
+
 
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -24,29 +28,38 @@ class Owner extends Component {
     });
   };
 
-  addUser = event => {
+  componentDidMount() {
+    this.addUser();
+  }
 
-    API.saveOwner({
-      firstName:this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword
- 
- }) 
+  addUser = event => {
+    API.getOwner()
+      .then(res =>
+        this.setState({ owners: res.data, firstName: "", lastName: "", email: "", password:"", confirmPassword: ""})
+      )
+      .catch(err => console.log(err));
+  };
+
+getOwner = id => {
+  API.getOwner(id)
+    .then(res => this.addUser())
+    .catch(err => console.log(err));
 };
 
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-    alert(`Hello ${this.state.username}`);
-    this.setState({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: ""
-    });
+    if (this.state.firstName && this.state.lastName) {
+      API.saveOwner({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword
+      })
+        .then(res => this.addUser())
+        .catch(err => console.log(err));
+    }
   };
 
 
@@ -54,6 +67,7 @@ class Owner extends Component {
   render() {
     return (
       <Container fluid>
+     
       <Col size="md-4">
       <div>
         <p>
@@ -99,9 +113,32 @@ class Owner extends Component {
         </form>
       </div>
       </Col>
+      <Col size="md-6 sm-12">
+            <Jumbotron>
+              <h1>Owner Profile</h1>
+            </Jumbotron>
+            {this.state.owners.length ? (
+              <List>
+                {this.state.owners.map(owner => (
+                  <ListItem key={owner._id}>
+                    <Link to={"/owners/" + owner._id}>
+                      <strong>
+                        {owner.firstName} {owner.lastName} 
+                           
+                        
+                      </strong>
+                    </Link>
+                  
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <h3>No Results to Display</h3>
+            )}
+          </Col>
+        
       </Container>
     );
   }
 }
-
 export default Owner;

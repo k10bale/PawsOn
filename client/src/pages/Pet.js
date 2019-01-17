@@ -2,11 +2,11 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import { Col, Container } from "../components/Grid";
 // import Jumbotron from "../components/Jumbotron";
-// import API from "../utils/API";
+import API from "../utils/API";
 
 class Pet extends Component {
   state = {
-        name: "",
+        petName: "",
         image: "",
         type: "",
         birthday:""
@@ -23,17 +23,39 @@ class Pet extends Component {
     });
   };
 
+  componentDidMount() {
+    this.addPet();
+  }
+
+  addPet = event => {
+    API.getPets()
+      .then(res =>
+        this.setState({ pets: res.data, petName: "", image: "", type: "", birthday:""})
+      )
+      .catch(err => console.log(err));
+  };
+
+getPets = id => {
+  API.getPets(id)
+    .then(res => this.addPet())
+    .catch(err => console.log(err));
+};
+
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-    alert(`${this.state.name} added as your pet!`);
-    this.setState({
-      name: "",
-      image: "",
-      type: "",
-      birthday: ""
-    });
+    if (this.state.petName && this.state.image) {
+      API.savePet({
+        petName: this.state.petName,
+        image: this.state.image,
+        type: this.state.type,
+        birthday: this.state.birthday
+      })
+        .then(res => this.addPet())
+        .catch(err => console.log(err));
+    }
   };
+
 
   render() {
     return (
@@ -67,12 +89,12 @@ class Pet extends Component {
           />
           <input className="form-control"
             value={this.state.birthday}
-            name="password"
+            name="birthday"
             onChange={this.handleInputChange}
-            type="birthday"
+            type="text"
             placeholder="Birthday"
           />
-          <button onClick={this.handleFormSubmit}>Add Pet</button>
+          <button onClick={this.addPet}>Add Pet</button>
         </form>
       </div>
       </Col>

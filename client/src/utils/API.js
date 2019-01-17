@@ -9,12 +9,12 @@ export default {
     return axios.get("/api/pets");
   },
   // Gets the book with the given id
-  // getOwner: function(id) {
-  //   return axios.get("/api/owner/" + id);
-  // },
-  // getPets: function(id) {
-  //   return axios.get("/api/pets/" + id);
-  // },
+  getOwnerId: function(id) {
+    return axios.get("/api/owner/" + id);
+  },
+  getPetsId: function(id) {
+    return axios.get("/api/pets/" + id);
+  },
   // Deletes the book with the given id
   deleteOwner: function(id) {
     return axios.delete("/api/owner/" + id);
