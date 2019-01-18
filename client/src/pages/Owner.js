@@ -29,7 +29,7 @@ class Owner extends Component {
   };
 
   componentDidMount() {
-    this.addUser();
+    // this.addUser();
   }
 
   addUser = event => {
@@ -109,7 +109,7 @@ getOwner = id => {
             type="text"
             placeholder="Confirm Password"
           />
-          <button onClick={this.addUser}>Submit</button>
+          <button onClick={this.handleFormSubmit}>Submit</button>
         </form>
       </div>
       </Col>
