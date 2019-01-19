@@ -5,6 +5,7 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import { List, ListItem } from "../components/List";
+import { Redirect } from 'react-router-dom'
 
 class Owner extends Component {
   state = {
@@ -13,7 +14,8 @@ class Owner extends Component {
         lastName: "",
         email: "",
         password:"",
-        confirmPassword: ""
+        confirmPassword: "",
+        pets: [ ]
   };
 
 
@@ -34,11 +36,12 @@ class Owner extends Component {
 
   addUser = event => {
     API.getOwner()
-      .then(res =>
-        this.setState({ owners: res.data, firstName: "", lastName: "", email: "", password:"", confirmPassword: ""})
-      )
+      .then(res => {
+        // this.setState({ owners: res.data, firstName: "", lastName: "", email: "", password:"", confirmPassword: ""});
+        this.redirectHome(res.data._id)
+      })
       .catch(err => console.log(err));
-  };
+  }; 
 
 getOwner = id => {
   API.getOwner(id)
@@ -57,10 +60,17 @@ getOwner = id => {
         password: this.state.password,
         confirmPassword: this.state.confirmPassword
       })
-        .then(res => this.addUser())
+        .then(res => this.redirectHome(res.data._id))
         .catch(err => console.log(err));
     }
   };
+
+  redirectHome = (id) => {
+    
+      const path = '/user/' + id;
+      // return <Redirect to = {`/user/${id}`}/>
+      this.props.history.push(`/user/${id}`);
+    }
 
 
 
@@ -114,14 +124,14 @@ getOwner = id => {
       </div>
       </Col>
       <Col size="md-6 sm-12">
-            <Jumbotron>
+            {/* <Jumbotron>
               <h1>Owner Profile</h1>
-            </Jumbotron>
+            </Jumbotron> */}
             {this.state.owners.length ? (
               <List>
                 {this.state.owners.map(owner => (
                   <ListItem key={owner._id}>
-                    <Link to={"/owners/" + owner._id}>
+                    <Link to={"/" + owner._id}>
                       <strong>
                         {owner.firstName} {owner.lastName} 
                            

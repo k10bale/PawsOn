@@ -106,9 +106,7 @@ getPets = id => {
       </div>
       </Col>
       <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Owner Profile</h1>
-            </Jumbotron>
+          
             {this.state.pets.length ? (
               <List>
                 {this.state.pets.map(pet => (
