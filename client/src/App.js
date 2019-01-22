@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Books from "./pages/Books";
+import Home from "./pages/Home";
 import Owner from "./pages/Owner";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
@@ -13,12 +13,10 @@ function App() {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/" component={Login} />
-          
+          <Route exact path="/user/:id" component={Home} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Owner} />
           <Route exact path="/addpet" component={Pet} />
-          <Route exact path="/books" component={Books} />
-
           <Route component={NoMatch} />
         </Switch>
       </div>
