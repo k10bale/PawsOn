@@ -45,6 +45,8 @@ getPets = id => {
     .catch(err => console.log(err));
 };
 
+
+
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
@@ -55,7 +57,7 @@ getPets = id => {
         species: this.state.species,
         birthday: this.state.birthday
         
-      })
+      },this.props.owner._id )
         .then(res => this.addPet())
         .catch(err => console.log(err));
     }
@@ -115,7 +117,7 @@ getPets = id => {
                       <strong>
                         {pet.petName} {pet.image} 
                            
-                        
+                      
                       </strong>
                     </Link>
                   

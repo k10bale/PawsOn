@@ -16,11 +16,18 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    console.log("owner created" + req.body);
+    console.log("pet created" + req.body);
     db.Pets
       .create(req.body)
+      .then((dbPet) => {
+        console.log(req.params.id);
+        console.log(dbPet);
+        return(
+        db.Owner.findOneAndUpdate({ _id: req.params.id }, {$push: { pets: dbPet._id }}, { new: true }))
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+    
   },
   update: function(req, res) {
     db.Pets

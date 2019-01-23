@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-
+import Pet from "./Pet"
 import Jumbotron from "../components/Jumbotron";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
-
+import { List, ListItem } from "../components/List";
 
 class Home extends Component {
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    state = {
+      owner:{},
+      pets: false
+    };
+
+addPet = () => {
+  this.setState({pets: true})
+}
 
  componentDidMount() {
     API.getOwnerId(this.props.match.params.id)
@@ -24,16 +31,24 @@ render() {
         
             <Jumbotron>
               <h1>
-              Welcome {this.props.firstName} 
+              Welcome {this.state.owner.firstName} 
               </h1>
             </Jumbotron>
             <Row>
           <Col size="md-2">
-            <Link to="/addpet"> Add a Pet</Link>
+            <h1>My Pets:
+            </h1>
+           
+              <List>
+              {this.state.owner.pets}
+              </List>
+           
+            <button onClick = {this.addPet}>Add Pet</button>
+          
           </Col>
         </Row>
-
-        </Container>
+        {this.state.pets && <Pet owner ={this.state.owner}/>} 
+    </Container>
     );
 }
 }
