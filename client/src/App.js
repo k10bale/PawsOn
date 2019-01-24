@@ -4,8 +4,7 @@ import Home from "./pages/Home";
 import Owner from "./pages/Owner";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
-// import Login from "./pages/Login";
-import Login from "./containers/Login";
+import Login from "./pages/Login";
 import Pet from "./pages/Pet";
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/user/:id" component={Home} />
-          {/* <Route exact path="/login" component={Login} /> */}
+          <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Owner} />
           <Route exact path="/addpet" component={Pet} />
           <Route path="/login" exact component={Login} />

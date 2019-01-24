@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Col, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-// import DeleteBtn from "../components/DeleteBtn";
+import DeleteBtn from "../components/DeleteBtn";
 import { List, ListItem } from "../components/List";
 
 class Pet extends Component {

@@ -1,5 +1,5 @@
 const db = require("../models");
-const User = require("../models/User")
+const Owner = require("../models/owner")
 const UserSession = require("../models/UserSession")
 
 // Defining methods for the loginController
@@ -49,7 +49,7 @@ module.exports = {
 
 
     // checkExist: (req, res) => {
-    db.User.find({
+    db.Owner.find({
       email: email
     }, (err, exists) => {
       if (err) {
@@ -65,13 +65,13 @@ module.exports = {
       };
     });
 
-
-    const newUser = new User();
-    newUser.email = email;
-    newUser.firstName = firstName;
-    newUser.lastName = lastName;
-    newUser.password = newUser.generateHash(password);
-    newUser.save((err, user) => {
+// 
+    const newOwner = new Owner();
+    newOwner.email = email;
+    newOwner.firstName = firstName;
+    newOwner.lastName = lastName;
+    newOwner.password = newOwner.generateHash(password);
+    newOwner.save((err, user) => {
       if (err) {
         return res.send({
           success: false,
@@ -115,9 +115,9 @@ module.exports = {
     email = email.toLowerCase();
 
 
-    User.find({
+    Owner.find({
       email: email
-    }, (err, users) => {
+    }, (err, Owner) => {
 //      console.log("Found user = " + users);
       if (err) {
         return res.send({
@@ -133,9 +133,9 @@ module.exports = {
       };
 
 
-      const user = users[0];
+      const owner = owners[0];
 //      console.log("password supplied = " + password);
-      if (!user.validPassword(password, user.password)) {
+      if (!user.validPassword(password, owner.password)) {
         return res.send({
           success: false,
           message: 'ERROR:  Invalid login.'
@@ -144,7 +144,7 @@ module.exports = {
 
 
       const userSession = new UserSession();
-      userSession.userId = user._id;
+      userSession.ownerId = owner._id;
       userSession.save((err, doc) => {
         if (err) {
           return res.send({

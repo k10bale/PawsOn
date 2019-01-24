@@ -1,6 +1,6 @@
 module.exports = {
   Owner: require("./owner"),
   Pets: require("./pets"),
-  User: require("./User"),
+  // User: require("./User"),
   UserSession: require("./UserSession")
 };

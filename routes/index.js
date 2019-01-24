@@ -1,7 +1,9 @@
 const path = require("path");
 const router = require("express").Router();
 const loginController = require("../controllers/loginController");
+const passport = require("../../config/passport");
 
+router.use("/api/signin", passport.authenticate("local"));
 
 // API Routes
 // Matches with "/api/signup"
