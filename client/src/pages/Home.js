@@ -23,8 +23,8 @@ class Home extends Component {
 
   
 
-addPet = (res) => {
-  this.setState({pets: res.data.owner.pets})
+addPet = () => {
+  this.setState({pets: true})
  
 }
 
@@ -60,20 +60,20 @@ render() {
               </h1>
             </Jumbotron>
             <Row>
-          <Col size="md-8">
+          <Col size="md-2">
             <h1>My Pets:
             </h1>
-           
-              {/* <List> */}
-              {/* /* {Object.keys(this.state.owner.pets).map(pet => {
-                 */}
+            </Col>
+            </Row>
+            <Row>
+            <Col size="md-8">
+              
                  {this.state.owner.pets.map(pet => (
                   <PetCard petName= {pet.petName }/>
                  )
                  )}
               
-              {/* {this.state.owner.map((item, index) => item.pets.map((petName, index) => (<li key={index}> {pets}</li>)))}  */}
-              {/* </List> */}
+
            
             <button onClick = {this.addPet}>Add Pet</button>
           
