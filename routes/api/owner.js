@@ -11,6 +11,7 @@ router
   .route("/:id")
   .get(ownerController.findById)
   .put(ownerController.update)
-  .delete(ownerController.remove);
+  .delete(ownerController.remove)
+  .post(ownerController.create);
 
 module.exports = router;

@@ -26,7 +26,7 @@ export default {
   saveOwner: function(ownerData) {
     return axios.post("/api/owner", ownerData);
   },
-  savePet: function(petData) {
-    return axios.post("/api/pets", petData);
+  savePet: function(petData, id) {
+    return axios.post("/api/pets/" + id, petData);
   }
 };
