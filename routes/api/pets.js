@@ -11,6 +11,7 @@ router
   .route("/:id")
   .get(petsController.findById)
   .put(petsController.update)
-  .delete(petsController.remove);
+  .delete(petsController.remove)
+  .post(petsController.create);
 
 module.exports = router;
