@@ -4,10 +4,10 @@ import axios from "axios";
 export default {
 
    // Search Google Books for the term provided 
-  getUser: (query) => {
+  getOwner: (query) => {
     return axios.post("/api/signin", query);
   },
-  createUser: (query) => {
+  createOwner: (query) => {
     return axios.post("/api/signup", query);
   },
   checkAuth: function(query) {

@@ -21,8 +21,8 @@ handleInputChange = event => {
   };
   
   
-  validateUser = query => {
-    API.getUser(query)
+  validateOwner = query => {
+    API.getOwner(query)
       .then(res => {
         console.log("LOGIN: res = " + JSON.stringify(res));
         if (res.data.success) {

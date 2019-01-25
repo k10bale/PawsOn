@@ -124,9 +124,9 @@ getOwner = id => {
       </div>
       </Col>
       <Col size="md-6 sm-12">
-            {/* <Jumbotron>
+            <Jumbotron>
               <h1>Owner Profile</h1>
-            </Jumbotron> */}
+            </Jumbotron>
             {this.state.owners.length ? (
               <List>
                 {this.state.owners.map(owner => (
