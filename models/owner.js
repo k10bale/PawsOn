@@ -7,7 +7,7 @@ const ownerSchema = new Schema({
   email: { type: String },
   password: { type: String },
   confirmPassword: { type: String },
-    pets: [{ type: Schema.Types.ObjectId, ref: "Pets"}, { type: Schema.Types.petName, ref: "Pets"}]
+    pets: [{ type: Schema.Types.ObjectId, ref: "Pets"}]
 });
 
 // ownerSchema.methods.generateHash = function(password) {

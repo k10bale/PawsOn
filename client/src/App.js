@@ -3,13 +3,16 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Owner from "./pages/Owner";
 import NoMatch from "./pages/NoMatch";
+// import Wrapper from "./components/Wrapper"
 import Nav from "./components/Nav";
 import Login from "./pages/Login";
 import Pet from "./pages/Pet";
 
 function App() {
   return (
+   
     <Router>
+      
       <div>
         <Nav />
         <Switch>
@@ -20,7 +23,9 @@ function App() {
           <Route component={NoMatch} />
         </Switch>
       </div>
+      
     </Router>
+    
   );
 }
 
