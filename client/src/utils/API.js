@@ -1,9 +1,12 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
+  // Gets all 
   getOwner: function() {
     return axios.get("/api/owner");
+  },
+  getOwnerAuth: function(query) {
+    return axios.post("/api/owner/login", query);
   },
   getPets: function() {
     return axios.get("/api/pets");
@@ -24,7 +27,7 @@ export default {
   },
   // Saves a book to the database
   saveOwner: function(ownerData) {
-    return axios.post("/api/owner", ownerData);
+    return axios.post("/api/owner/", ownerData);
   },
   savePet: function(petData, id) {
     return axios.post("/api/pets/" + id, petData);

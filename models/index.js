@@ -1,4 +1,8 @@
+const mongoose = require("mongoose");
+// const Schema = mongoose.Schema;
+
 module.exports = {
   Owner: require("./owner"),
-  Pets: require("./pets")
+  Pets: require("./pets"),
+  userSession: require("./userSession")
 };

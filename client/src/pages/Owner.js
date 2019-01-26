@@ -37,7 +37,7 @@ class Owner extends Component {
   addUser = event => {
     API.getOwner()
       .then(res => {
-        // this.setState({ owners: res.data, firstName: "", lastName: "", email: "", password:"", confirmPassword: ""});
+        this.setState({ owners: res.data, firstName: "", lastName: "", email: "", password:"", confirmPassword: ""});
         this.redirectHome(res.data._id)
       })
       .catch(err => console.log(err));
@@ -67,9 +67,9 @@ getOwner = id => {
 
   redirectHome = (id) => {
     
-      const path = '/user/' + id;
+      const path = '/login/';
       // return <Redirect to = {`/user/${id}`}/>
-      this.props.history.push(`/user/${id}`);
+      this.props.history.push(`/login`);
     }
 
 

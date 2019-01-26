@@ -1,7 +1,9 @@
 const router = require("express").Router();
 const petsController = require("../../controllers/petsController");
+const mongoose = require("mongoose");
+// const Schema = mongoose.Schema;
 
-// Matches with "/api/books"
+// Matches with "/api/pets"
 router.route("/")
   .get(petsController.findAll)
   .post(petsController.create);
