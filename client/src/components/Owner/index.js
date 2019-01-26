@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "./style.css"
 
-import API from "../utils/API";
-// import DeleteBtn from "../components/DeleteBtn";
-import { List, ListItem } from "../components/List";
+import API from "../../utils/API";
+
+// import { List, ListItem } from "../components/List";
 import { Redirect } from 'react-router-dom'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import "./style.css"
 
 class Owner extends Component {
   state = {
@@ -61,6 +63,7 @@ getOwner = id => {
         confirmPassword: this.state.confirmPassword
       })
         .then(res => this.redirectHome(res.data._id))
+        .then (()=> this.props.toggle() )
         .catch(err => console.log(err));
     }
   };
@@ -123,32 +126,8 @@ getOwner = id => {
           <button onClick={this.handleFormSubmit}>Submit</button>
           </Form>
           
-      // <Col size="md-6 sm-12">
-      //       {/* <Jumbotron>
-      //         <h1>Owner Profile</h1>
-      //       </Jumbotron> */}
-      //       {this.state.owners.length ? (
-      //         <List>
-      //           {this.state.owners.map(owner => (
-      //             <ListItem key={owner._id}>
-      //               <Link to={"/" + owner._id}>
-      //                 <strong>
-      //                   {owner.firstName} {owner.lastName} 
-                           
-                        
-      //                 </strong>
-      //               </Link>
-                  
-      //             </ListItem>
-      //           ))}
-      //         </List>
-      //       ) : (
-      //         <h3>No Results to Display</h3>
-      //       )}
-      //     </Col>
-        
-      
-    );
+          );
+    }
   }
-}
+
 export default Owner;

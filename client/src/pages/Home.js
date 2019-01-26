@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import Pet from "./Pet"
+import Pet from "../components/Pet"
 import Jumbotron from "../components/Jumbotron";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import PetCard from "../components/Card";
+import PetModal from "../components/PetModal";
+// import Pet from "./Owner";
+
+// import ImageUpload from "../components/ImageUpload/image_uplaod";
 
 class Home extends Component {
     constructor(props) {
@@ -75,12 +79,17 @@ render() {
               
 
            
-            <button onClick = {this.addPet}>Add Pet</button>
+            {/* <button onClick = {this.addPet}>Add Pet</button> */}
+            <PetModal owner={this.state.owner} />
           
           </Col>
         </Row>
-        {this.state.pets && <Pet owner ={this.state.owner}/>} 
+        {/* {this.state.pets && <Pet owner ={this.state.owner}/>}  */}
+        <div>
+          {/* <ImageUpload/> */}
+          </div>
     </Container>
+    
     );
 }
 }

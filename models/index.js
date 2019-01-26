@@ -1,4 +1,5 @@
 module.exports = {
   Owner: require("./owner"),
-  Pets: require("./pets")
+  Pets: require("./pets"),
+  Reminder: require("./reminder")
 };
