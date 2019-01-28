@@ -19,6 +19,8 @@ function App() {
         <Switch>
           <Route exact path="/user/:id" component={Home} />
           <Route exact path="/" component={Login} />
+          {/* <Route exact path="/owner/:id" component={Home} /> */}
+          <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Owner} />
           <Route exact path="/addpet" component={Pet} />
           <Route component={NoMatch} />

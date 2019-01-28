@@ -14,23 +14,39 @@ import PetModal from "../components/PetModal";
 class Home extends Component {
     constructor(props) {
         super(props);
-
+    
     this.state = {
       owner:{
         pets: []
       }
-     
     }
-    // this.handleChange = this.handleChange.bind(this)
-    // this.handleAddFeature = this.handleAddFeature.bind(this)
-  }
+    }
+  //   // componentDidMount() ;{
+  //   //   let readToken = window.localStorage.getItem("SMC_authkey");
+  //   //   let query = {
+  //   //     token: readToken
+  //   //   };
+  //     API.checkAuth(query)
+  //       .then(res => {
+  //         if (res.data.success) {
+  //           this.setState({ isLoggedIn: true, });
+  //         } else {
+  //           this.setState({ isLoggedIn: false });
+  //           window.location.assign('/login');
+  //         };
+  //       })
+  //       .catch(err => console.log(err));
+  //     }
+  //   // this.handleChange = this.handleChange.bind(this)
+  //   // this.handleAddFeature = this.handleAddFeature.bind(this)
+  // }
 
   
 
 addPet = () => {
   this.setState({pets: true})
  
-}
+};
 
 getPets = id => {
   API.getPets(id)
@@ -38,18 +54,17 @@ getPets = id => {
     .catch(err => console.log(err));
 };
 
-// getPets = petName => {
-//   API.getPets(petName)
-//     .then(res => this.addPet())
-//     .catch(err => console.log(err));
-// };
+getPets = petName => {
+  API.getPets(petName)
+    .then(res => this.addPet())
+    .catch(err => console.log(err));
+};
 
  componentDidMount() {
     API.getOwnerId(this.props.match.params.id)
           .then(res => this.setState({ owner: res.data }))
-         
           .catch(err => console.log(err));
-      }
+      };
       
 
 render() {

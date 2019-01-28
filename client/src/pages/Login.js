@@ -10,7 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Owner from "../components/Owner";
-import ReminderList from '../components/Reminders';
+// import ReminderList from '../components/Reminders';
 
 
 // import Modal from "../components/Modal";
@@ -18,31 +18,45 @@ import ReminderList from '../components/Reminders';
 
 library.add(faEnvelope, faKey);
 
+import React, {
+  Component
+} from "react";
+import {
+  Link
+} from "react-router-dom";
+// import "./style.css";
+import axios from 'axios';
+import API from "../utils/API";
 
 class Login extends Component {
   constructor(props) {
     super(props);
   // Setting the component's initial state
-  this.state = { 
-    email: "",
-    password: "",
-    validate: {
-      emailState: '',
-    },
+  // this.state = { 
+  //   email: "",
+  //   password: "",
+  //   validate: {
+  //     emailState: '',
+  //   },
+  // }
+  // this.handleChange = this.handleChange.bind(this);
+  //   };
+  state = {
+    username: "",
+    password: ""
   }
-  this.handleChange = this.handleChange.bind(this);
-    };
+  };
 
-  validateEmail(e) {
-      const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      const { validate } = this.state
-        if (emailRex.test(e.target.value)) {
-          validate.emailState = 'has-success'
-        } else {
-          validate.emailState = 'has-danger'
-        }
-        this.setState({ validate })
-      }
+  // validateEmail(e) {
+  //     const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //     const { validate } = this.state
+  //       if (emailRex.test(e.target.value)) {
+  //         validate.emailState = 'has-success'
+  //       } else {
+  //         validate.emailState = 'has-danger'
+  //       }
+  //       this.setState({ validate })
+  //     }
 
   // handleInputChange = event => {
   //   // Getting the value and name of the input which triggered the chang
@@ -69,11 +83,92 @@ class Login extends Component {
     });
   }
 
+  getOwner = id => {
+    API.getOwner(id)
+      .then(res => this.addUser())
+      .catch(err => console.log(err));
+  };
+
+
+  redirectHome = (id) => {
+
+    const path = '/user/' + id;
+    // return <Redirect to = {`/user/${id}`}/>
+    this.props.history.push(`/user/${id}`);
+  }
+
+  
+
+  validateOwner = query => {
+    API.getOwnerAuth(query)
+      .then(res => {
+        console.log("LOGIN: res = " + JSON.stringify(res));
+        if (res.data.success) {
+          console.log("in success handle");
+          this.setState({
+            isLoggedIn: false,
+          });
+          this.setState({
+            loginMsg: res.data.message
+          });
+          window.localStorage.setItem("SMC_authkey", res.data.token);
+          // window.location.assign('/authenticated/main');
+        } else {
+          console.log("in failure handle");
+          this.setState({
+            isLoggedIn: true
+          });
+          this.setState({
+            loginMsg: res.data.message
+          });
+          window.localStorage.setItem("SMC_authkey", "");
+          // window.location.assign('/login');
+        }
+        console.log("LOGIN: state = " + JSON.stringify(this.state));
+      })
+      .catch(err => console.log(err));
+
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log("state: " + this.state);
+    console.log("validateOwner: " + this.validateOwner);
+    // this.validateOwner({
+    //     email: this.state.username,
+    //     password: this.state.password
+    //   })
+    const query = {
+          email: this.state.username,
+          password: this.state.password
+        }
+    API.getOwnerAuth(query)
+      // console.log("state = " + JSON.stringify(this.state));
+      .then(res => this.redirectHome(res.data._id))
+      .catch(err => console.log(err));
+  };
 
 
   // handleFormSubmit = event => {
   //   // Preventing the default behavior of the form submit (which is to refresh the page)
   //   event.preventDefault();
+
+  //   if (!this.state.username || !this.state.password) {
+  //     alert("Fill out your first and last name please!");
+  //   } else if (this.state.password.length < 6) {
+  //     alert(
+  //       `Choose a more secure password ${this.state.firstName} ${this.state
+  //         .lastName}`
+  //     );
+  //   } else {
+  //     alert(`Hello ${this.state.username}`);
+  //   }
+
+  //   this.setState({
+  //     username: "",
+  //     password: ""
+  //   });
+  // };
 
   //   if (!this.state.email || !this.state.password) {
   //     alert("Fill out your first and last name please!");
@@ -166,26 +261,6 @@ class Login extends Component {
     
     );
   }
-}
-          
-				//   <button
-				//       type="button"
-				//       className="btn btn-outline-success btn-sm">
-				//       Register
-		    // </button>
-		   
-     
-        // <div>
-        // <Modal>
-        
-        // </Modal>
-        // </div>
-      
-     
-
- 
-    
-  
-
+};
 
 export default Login;
