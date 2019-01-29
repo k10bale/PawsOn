@@ -4,8 +4,9 @@ import API from "../utils/API";
 
 class ReminderList extends Component {
   state = {
-      reminder: [],
-     reminderName: ""
+     reminderName: "",
+     time: "",
+     petName: ""
   };
 
 
@@ -54,18 +55,15 @@ getPet = id => {
 // }
 
 handleFormSubmit = event => {
-  // console.log(this.props.reminder._id);
+  // return console.log(this.state);
   // Preventing the default behavior of the form submit (which is to refresh the page)
   event.preventDefault();
-  // if (this.state.petName && this.state.image) {
-    API.saveReminder({
-      reminderName: this.state.reminderName,
-
-      
-    // },this.props.pets._id )
-    },)
-      .then(res => this.addReminder())
-      .then (()=> this.props.toggle())
+const {
+  reminderName, petName, time
+} = this.state
+  API.saveReminder({reminderName, petName, time})
+      .then(res => console.log(res.data))
+      // .then (()=> this.props.toggle())
       .catch(err => console.log(err));
   
 };
@@ -80,12 +78,27 @@ handleFormSubmit = event => {
             ref={this.props.inputElement}
             value={this.props.reminderName.text}
             onChange={this.props.handleInput} /> */}
+          
+            <Input className="form-control"
+            value={this.state.petName}
+            name="petName"
+            onChange={this.handleInputChange}
+            type="text"
+            placeholder="pet name"
+          />
           <Input className="form-control"
             value={this.state.remindertName}
             name="reminderName"
             onChange={this.handleInputChange}
             type="text"
             placeholder="reminder"
+          />
+          <Input className="form-control"
+            value={this.state.time}
+            name="time"
+            onChange={this.handleInputChange}
+            type="text"
+            placeholder="date: 'yyyy-mm-dd"
           />
 
       <Button color="primary" onClick={this.handleFormSubmit}>Add Reminder</Button>

@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 // yarn routes
 router.use("/owner", ownerRoutes);
 router.use("/pets", petRoutes);
-router.use("/reminder", reminderRoutes);
+router.use("/reminders", reminderRoutes);
 // do I need this?
 // router.use("/userSession", userRoutes)
 

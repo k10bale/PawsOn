@@ -5,27 +5,28 @@ const Twilio = require('twilio');
 // const Schema = mongoose.Schema;
 
 const reminderSchema = new mongoose.Schema({
+  petName: {
+    type: String,
+    required: true
+  },
   reminderName: {
     type: String,
-    // required: true
+    required: true
   },
-  // },
-  // time: {
-  //   type: Date,
-  //   required : true
-  // },
-  // reminderNumber: {
-  //   type: String,
-  //   required:true
-  // },
-  // notification: {
-  //   type: Number,
-  //   required: true
-  // },
-  // notificationLabel: {
-  //   type: String,
-  //   required: true
   
+  time: {
+    type: Date,
+    required : true
+  },
+  reminderNumber: {
+    type: String,
+  },
+  notification: {
+    type: Number,
+  },
+  notificationLabel: {
+    type: String
+  }
   //  pets: [{ type: Schema.Types.ObjectId, ref: "Pets"}]
 }); 
 

@@ -12,7 +12,7 @@ export default {
     return axios.get("/api/pets");
   },
   getReminder: function() {
-    return axios.get("/api/reminder");
+    return axios.get("/api/reminders");
   },
   // Gets the book with the given id
   getOwnerId: function(id) {
@@ -22,7 +22,7 @@ export default {
     return axios.get("/api/pets/" + id);
   },
   getReminderId: function(id) {
-    return axios.get("/api/reminder/" + id);
+    return axios.get("/api/reminders/" + id);
   },
   // Deletes the book with the given id
   deleteOwner: function(id) {
@@ -32,7 +32,7 @@ export default {
     return axios.delete("/api/pets/" + id);
   },
   deleteReminder: function(id) {
-    return axios.delete("/api/reminder/" + id);
+    return axios.delete("/api/reminders/" + id);
   },
   // Saves a book to the database
   saveOwner: function(ownerData) {
@@ -42,6 +42,6 @@ export default {
     return axios.post("/api/pets/" + id, petData);
   },
   saveReminder: function(reminderData, id) {
-    return axios.post("/api/reminder/" + id, reminderData);
+    return axios.post("/api/reminders/" + id, reminderData);
   }
 };

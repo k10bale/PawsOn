@@ -21,27 +21,36 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
    
-  create : function(req, res) {
-    console.log("the server received the post request!!!" + req.body);
+  create :async function(req, res) {
+    // return console.log(req.body, 'hello there')
     // const petid = req.params.petid;
-    db.Reminder
-      .create(req.body)
-      .then(dbReminder => {
-        console.log(req.params.id);
-        console.log(dbReminder);
-        //if appt is created successfully, find the user and and push the new appt's _id to the user's appointments array 
-        return (
-        db.Pets.findOneAndUpdate({ _id: req.params.id }, { $push : { reminder : dbReminder._id }}, { new : true }))
-        //res.json(dbAppt)
-        .populate('Reminder', 'reminderName')
-        .then((reminder) => {
-          console.log("Populated Pet " + reminder);
-        })
+    const reminder = new db.Reminder(req.body)
+    const newReminder = await reminder.save()
+   try {
+    if(newReminder) {
+      res.status(201).send({
+        message: 'reminder was created successfully',
+        newReminder
       })
-     
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
     
+    }
+   } catch (error) {
+     res.status(500).send({
+       error
+     })
+   }
+    // db.Reminder.create(req.body)
+    //   .then(dbReminder => {
+    //     console.log(dbReminder);
+    //     //if appt is created successfully, find the user and and push the new appt's _id to the user's appointments array 
+    //     return db.Pets.findOneAndUpdate({ _id: petid }, { $push : { reminders : dbReminder._id }}, { new : true });
+    //     //res.json(dbAppt)
+    //   })
+    //   .then(dbPet => {
+    //     //if the user is updated successfully, send it back to the client
+    //     return res.json(dbPet)
+    //   })
+    //   .catch(err => res.status(422).json(err));
   },
     
         // })
