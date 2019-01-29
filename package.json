@@ -29,7 +29,10 @@
     "react-bootstrap": "^0.32.4",
     "react-popper": "^1.3.2",
     "react-transition-group": "^2.5.3",
-    "reactstrap": "^7.1.0"
-   
+    "reactstrap": "^7.1.0",
+    "remove-node-modules": "^1.7.4",
+    "twilio": "^3.27.1",
+    "webassembly": "^0.11.0",
+    "webassemblyjs": "^1.8.1"
   }
 }

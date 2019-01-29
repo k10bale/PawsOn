@@ -11,52 +11,49 @@ import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Owner from "../components/Owner";
 // import ReminderList from '../components/Reminders';
-
-
-// import Modal from "../components/Modal";
-// import Link from "../components/Link";
-
-library.add(faEnvelope, faKey);
-
-import React, {
-  Component
-} from "react";
 import {
   Link
 } from "react-router-dom";
 // import "./style.css";
 import axios from 'axios';
 import API from "../utils/API";
+import {ReminderList, Reminder} from "./Reminders"
+// import Modal from "../components/Modal";
+// import Link from "../components/Link";
+
+library.add(faEnvelope, faKey);
+
+
 
 class Login extends Component {
   constructor(props) {
     super(props);
   // Setting the component's initial state
-  // this.state = { 
-  //   email: "",
-  //   password: "",
-  //   validate: {
-  //     emailState: '',
-  //   },
-  // }
-  // this.handleChange = this.handleChange.bind(this);
-  //   };
-  state = {
-    username: "",
-    password: ""
+  this.state = { 
+    email: "",
+    password: "",
+    validate: {
+      emailState: '',
+    },
   }
-  };
+  this.handleChange = this.handleChange.bind(this);
+    };
+  // state = {
+  //   username: "",
+  //   password: ""
+  // }
+  // };
 
-  // validateEmail(e) {
-  //     const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //     const { validate } = this.state
-  //       if (emailRex.test(e.target.value)) {
-  //         validate.emailState = 'has-success'
-  //       } else {
-  //         validate.emailState = 'has-danger'
-  //       }
-  //       this.setState({ validate })
-  //     }
+  validateEmail(e) {
+      const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const { validate } = this.state
+        if (emailRex.test(e.target.value)) {
+          validate.emailState = 'has-success'
+        } else {
+          validate.emailState = 'has-danger'
+        }
+        this.setState({ validate })
+      }
 
   // handleInputChange = event => {
   //   // Getting the value and name of the input which triggered the chang
@@ -149,44 +146,7 @@ class Login extends Component {
   };
 
 
-  // handleFormSubmit = event => {
-  //   // Preventing the default behavior of the form submit (which is to refresh the page)
-  //   event.preventDefault();
-
-  //   if (!this.state.username || !this.state.password) {
-  //     alert("Fill out your first and last name please!");
-  //   } else if (this.state.password.length < 6) {
-  //     alert(
-  //       `Choose a more secure password ${this.state.firstName} ${this.state
-  //         .lastName}`
-  //     );
-  //   } else {
-  //     alert(`Hello ${this.state.username}`);
-  //   }
-
-  //   this.setState({
-  //     username: "",
-  //     password: ""
-  //   });
-  // };
-
-  //   if (!this.state.email || !this.state.password) {
-  //     alert("Fill out your first and last name please!");
-  //   } else if (this.state.password.length < 6) {
-  //     alert(
-  //       `Choose a more secure password ${this.state.firstName} ${this.state
-  //         .lastName}`
-  //     );
-  //   } else {
-  //     alert(`Hello ${this.state.email}`);
-  //   }
-
-  //   this.setState({
-  //     email: "",
-  //     password: ""
-  //   });
-  // };
-
+ 
   submitForm(e) {
     e.preventDefault();
     console.log(`Email: ${ this.state.email }`)
@@ -257,6 +217,7 @@ class Login extends Component {
           {/* </Link> */}
           <OwnerModal> {Owner} </OwnerModal>
       </Form>
+  
       </Container>
     
     );

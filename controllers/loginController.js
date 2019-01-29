@@ -148,9 +148,9 @@ console.log('passed all checks');
       };
 
 
-      const userSession = new userSession();
-      userSession.ownerId = owner._id;
-      userSession.save((err, doc) => {
+      const userSes = new userSession();
+      userSes.ownerId = owner._id;
+      userSes.save((err, doc) => {
         if (err) {
           return res.send({
             success: false,
