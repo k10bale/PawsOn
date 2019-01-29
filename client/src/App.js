@@ -17,10 +17,15 @@ function App() {
       <div>
         <Nav />
         <Switch>
+<<<<<<< HEAD
           <Route exact path="/user/:id" component={Home} />
           <Route exact path="/" component={Login} />
           <Route exact path="/reminders" component={Reminders} />
           <Route exact path="/login" component={Login} />
+=======
+         <Route exact path="/" component={Login} />
+          <Route exact path="/owner/:id" component={Home} /> 
+>>>>>>> updated
           <Route exact path="/signup" component={Owner} />
           <Route exact path="/addpet" component={Pet} />
           <Route component={NoMatch} />

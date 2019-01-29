@@ -1,5 +1,5 @@
 // what should I do with userSession 
-
+const jwt = require("jsonwebtoken")
 const db = require("../models");
 const Owner = require("../models/owner")
 const userSession = require("../models/userSession")
@@ -11,166 +11,120 @@ module.exports = {
 //************************************************************/
 //* Allow users to self register
 //************************************************************/
-  signUp: (req, res) => {
-   console.log("body = " + JSON.stringify(req.body));
-    const { body } = req;
-    const {
-      firstName,
-      lastName,
-      password
-    } = body;
-    let { email } = body;
+signUp: async(req, res) => {
+  let {
+    firstName,
+    lastName,
+    password,
+    email
+  } = req.body;
 
-
-
-
-    if (!firstName) {
-      return res.send({
-        success: false,
-        message: 'ERROR: You must specify a first name.'
-      });
-    };
-    if (!lastName) {
-      return res.send({
-        success: false,
-        message: 'ERROR: You must specify a last name.'
-      });
-    };
-    if (!email) {
-      return res.send({
-        success: false,
-        message: 'ERROR: You must specify an email address.'
-      });
-    };
-    if (!password) {
-      return res.send({
-        success: false,
-        message: 'ERROR: You must specify a password.'
-      });
-    };
-    email = email.toLowerCase();
-console.log("pass all checks")
-
-    // checkExist: (req, res) => {
-    db.Owner.find({
-      email: email
-    }, (err, exists) => {
-      if (err) {
-        return res.send({
-          success: false,
-          message: 'ERROR:  Server error'
-        });
-      } else if (exists.length > 0) {
-        return res.send({
-          success: false,
-          message: 'ERROR:  Account requested does not meet requriements'
-        });
-      };
+  if (!firstName) {
+    return res.send({
+      success: false,
+      message: 'ERROR: You must specify a first name.'
     });
-console.log("after db look up");
+  };
+  if (!lastName) {
+    return res.send({
+      success: false,
+      message: 'ERROR: You must specify a last name.'
+    });
+  };
+  if (!email) {
+    return res.send({
+      success: false,
+      message: 'ERROR: You must specify an email address.'
+    });
+  };
+  if (!password) {
+    return res.send({
+      success: false,
+      message: 'ERROR: You must specify a password.'
+    });
+  };
+  email = email.toLowerCase();
 
-    const newOwner = new Owner();
-    newOwner.email = email;
-    newOwner.firstName = firstName;
-    newOwner.lastName = lastName;
-    newOwner.password = newOwner.generateHash(password);
-    newOwner.save((err, Owner) => {
-      console.log("err = " + err);
-      if (err) {
-        return res.send({
-          success: false,
-          message: 'ERROR:  Server error'
-        });
-      }
-      console.log("success?")
-      return res.send({
-        success: true,
-        message: 'Signup complete!'
-      });
+  const ownerExists = await Owner.findOne({email: email})
+  if (ownerExists) {
+    return res.status(409).json({
+      status: 409,
+      message: 'User already exists'
+    });
+  }
+ try {
+  const owner = new Owner();
+  owner.email = email;
+  owner.firstName = firstName;
+  owner.lastName = lastName;
+  owner.password = owner.generateHash(password);
 
-    }
-      // }
-    )
-  },
-
-
-
+  const newOwner = await owner.save();
+  if (newOwner) {
+    const token = jwt.sign(
+      {
+        id: newOwner._id,
+        username: newOwner.firstName,
+        email: newOwner.email
+      },
+      'secretKey',
+      { expiresIn: 24 * 60 * 60 }
+    );
+    return res.status(201).send({
+      message: `Welcome!! ${firstName}`,
+      user: newOwner,
+      token
+    });
+  }
+ } catch (error) {
+  res.status(500).json(error)
+ }
+},
 //************************************************************/
 //* Process Owner Sign-in and create auth token for them
 //************************************************************/
-  signIn: (req, res) => {
-    const { body } = req;
-    const { password } = body;
-    let { email } = body;
-
-    console.log("email = " + email + "  password = " + password);
-
-    if (!email) {
-      return res.send({
-        success: false,
-        message: 'ERROR: You must specify an email address.'
-      });
-    };
-    if (!password) {
-      return res.send({
-        success: false,
-        message: 'ERROR: You must specify a password.'
-      });
-    };
-    email = email.toLowerCase();
-console.log('passed all checks');
-
-    Owner.find({
-      email: email
-    }, (err, Owners) => {
-//      console.log("Found Owner = " + Owners);
-      if (err) {
-        return res.send({
-          success: false,
-          message: 'ERROR:  Server error'
-        });
-      };
-      if (Owners.length != 1) {
-        return res.send({
-          success: false,
-          message: 'ERROR:  Unable to process login.'
-        });
-      };
-
-
-      const Owner = Owners[0];
-//      console.log("password supplied = " + password);
-      if (!Owner.validPassword(password, Owner.password)) {
-        return res.send({
-          success: false,
-          message: 'ERROR:  Invalid login.'
-        });
-      };
-
-
-      const userSes = new userSession();
-      userSes.ownerId = owner._id;
-      userSes.save((err, doc) => {
-        if (err) {
-          return res.send({
-            success: false,
-            message: 'ERROR:  Server error'
-          });
-        };
-
-
-        return res.send({
-          success: true,
-          message: "User login is complete",
-          token: doc._id,
-          id: owner._id
-        });
-      });
+signIn: async (req, res) => {
+  let { email, password } = req.body;
+  if (!email) {
+    return res.send({
+      success: false,
+      message: 'ERROR: You must specify an email address.'
     });
-  },
+  };
+  if (!password) {
+    return res.send({
+      success: false,
+      message: 'ERROR: You must specify a password.'
+    });
+  };
+  email = email.toLowerCase();
+  try {
+    const owner = await Owner.findOne({ email: email })
 
-
-
+    if (owner && owner.validPassword(password, owner.password)) {
+    
+      const token = jwt.sign({
+      email: owner.email,
+      userId: owner._id,
+    }, "secretKey", { expiresIn: 86400 });
+    return res.status(200).send({
+      token,
+      owner: {
+        id: owner._id,
+        email: owner.email
+      },
+      message: `Welcome back ${owner.firstName}`
+    });
+  }
+  return res.status(401).json({
+    errors:
+      { message: 'Failed to authenticate user' }
+  });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error })
+  }
+},
 //************************************************************/
 //* Verify validity of a user's token if presented 
 //************************************************************/
@@ -222,6 +176,7 @@ console.log('passed all checks');
       _id: token,
       isDeleted: false
     }, {
+      // PROBLEM AREA //////////////////////////////////////////
       $set:{isDeleted:true}
     }, null, (err, sessions) => {
       if (err) {

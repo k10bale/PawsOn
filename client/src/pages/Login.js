@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import {
   Container, Col, Form,
@@ -54,6 +53,10 @@ class Login extends Component {
         }
         this.setState({ validate })
       }
+  state = {
+    email: "",
+    password: ""
+  };
 
   // handleInputChange = event => {
   //   // Getting the value and name of the input which triggered the chang
@@ -89,9 +92,9 @@ class Login extends Component {
 
   redirectHome = (id) => {
 
-    const path = '/user/' + id;
+   
     // return <Redirect to = {`/user/${id}`}/>
-    this.props.history.push(`/user/${id}`);
+    this.props.history.push(`/owner/${id}`);
   }
 
   
@@ -136,12 +139,12 @@ class Login extends Component {
     //     password: this.state.password
     //   })
     const query = {
-          email: this.state.username,
+          email: this.state.email,
           password: this.state.password
         }
     API.getOwnerAuth(query)
       // console.log("state = " + JSON.stringify(this.state));
-      .then(res => this.redirectHome(res.data._id))
+      .then(res => this.redirectHome(res.data.owner.id))
       .catch(err => console.log(err));
   };
 
