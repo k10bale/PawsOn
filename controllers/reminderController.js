@@ -1,13 +1,32 @@
 const express = require("express");
 const db = require("../models");
 
+
+
 //define methods for userController
 module.exports = {
+
+  findAll: function(req, res) {
+    db.Reminder
+      .find(req.query)
+      .sort({ date: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findById: function(req, res) {
+    db.Reminder
+      .findById(req.params.id)
+      .populate('Reminders')
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+   
   create : function(req, res) {
     console.log("the server received the post request!!!");
     console.log(req.body);
     const petid = req.params.petid;
-    db.Reminder.create(req.body)
+    db.Reminder
+      .create(req.body)
       .then(dbReminder => {
         console.log(dbReminder);
         //if appt is created successfully, find the user and and push the new appt's _id to the user's appointments array 
@@ -25,7 +44,7 @@ module.exports = {
     const petId = req.param('petid');
 
     db.Pets.find({ _id : petId})
-      .populate("appointments")
+      .populate("reminders")
       .then(dbPetReminders => 
         //console.log(dbUserAppts)
         res.json(dbPetReminders)
