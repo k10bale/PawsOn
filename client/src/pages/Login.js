@@ -10,11 +10,9 @@ import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Owner from "../components/Owner";
 // import ReminderList from '../components/Reminders';
-import {
-  Link
-} from "react-router-dom";
+// import {Link} from "react-router-dom";
 // import "./style.css";
-import axios from 'axios';
+// import axios from 'axios';
 import API from "../utils/API";
 import {ReminderList, Reminder} from "./Reminders"
 // import Modal from "../components/Modal";
