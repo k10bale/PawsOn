@@ -214,7 +214,7 @@ class Login extends Component {
             />
             </FormGroup>
           </Col>
-          <Button>Submit</Button>
+          <Button onClick = {this.handleFormSubmit}>Submit</Button>
           {/* <Link to="/signup/"> */}
           <Button href= "/signup/">Sign Up</Button> 
           {/* </Link> */}
