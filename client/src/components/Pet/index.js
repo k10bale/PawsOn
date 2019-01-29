@@ -17,6 +17,7 @@ class Pet extends Component {
         image: "",
         species: "",
         birthday:"",
+        reminders: []
   };
 
 

@@ -21,6 +21,7 @@ function App() {
           <Route exact path="/owner/:id" component={Home} /> 
           <Route exact path="/signup" component={Owner} />
           <Route exact path="/addpet" component={Pet} />
+          <Route exact path="/addreminders" component={Reminders} />
           <Route component={NoMatch} />
         </Switch>
       </div>
