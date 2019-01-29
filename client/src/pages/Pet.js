@@ -56,7 +56,7 @@ getPets = id => {
         image: this.state.image,
         species: this.state.species,
         birthday: this.state.birthday
-        
+        // I think this is where the problem is 
       },this.props.owner._id )
         .then(res => this.addPet())
         .catch(err => console.log(err));

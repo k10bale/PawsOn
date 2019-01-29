@@ -106,7 +106,7 @@ getPets = id => {
             type="text"
             placeholder="Species"
           />
-         <FormGroup>
+         {/* <FormGroup>
           <Label for="exampleSelect">Select Species</Label>
           <Input type="select" name="select" id="exampleSelect">
             <option>Dog</option>
@@ -115,7 +115,7 @@ getPets = id => {
             <option>Reptile</option>
             <option>Rodent</option>
           </Input>
-        </FormGroup>
+        </FormGroup> */}
           </FormGroup>
           <FormGroup>
           <Input className="form-control"
