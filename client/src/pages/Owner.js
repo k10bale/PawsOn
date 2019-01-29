@@ -60,16 +60,14 @@ getOwner = id => {
         password: this.state.password,
         confirmPassword: this.state.confirmPassword
       })
-        .then(res => this.redirectHome(res.data._id))
+        .then(res => this.redirectHome())
         .catch(err => console.log(err));
     }
   };
 
-  redirectHome = (id) => {
+  redirectHome = () => {
     
-      const path = '/login/';
-      // return <Redirect to = {`/user/${id}`}/>
-      this.props.history.push(`/login`);
+      this.props.history.push(`/`);
     }
 
 
