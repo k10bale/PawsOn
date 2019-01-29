@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Link } from "react-router-dom";
 import "./style.css";
 
 function PetCard(props) {
@@ -12,7 +13,7 @@ function PetCard(props) {
         <CardTitle>{props.petName}</CardTitle>
         {/* <CardSubtitle>{company}</CardSubtitle>
         <CardText>{description}</CardText> */}
-        <Button color="danger">Reminders</Button>
+        <Button color="danger"href= "/addreminders/">Reminders</Button>
         <Button color="danger">Delete</Button>
       </CardBody>
     </Card>

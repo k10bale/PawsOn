@@ -12,7 +12,7 @@ module.exports = {
   findById: function(req, res) {
     db.Pets
       .findById(req.params.id)
-      .populate('Pets')
+      .populate('Reminder')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -48,6 +48,7 @@ module.exports = {
   update: function(req, res) {
     db.Pets
       .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .populate("Reminder")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

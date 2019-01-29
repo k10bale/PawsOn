@@ -2,29 +2,31 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const Twilio = require('twilio');
 // const config = require('../config');
-
+// const Schema = mongoose.Schema;
 
 const reminderSchema = new mongoose.Schema({
   reminderName: {
     type: String,
-    required: true
+    // required: true
   },
-  time: {
-    type: Date,
-    required : true
-  },
-  reminderNumber: {
-    type: String,
-    required:true
-  },
-  notification: {
-    type: Number,
-    required: true
-  },
-  notificationLabel: {
-    type: String,
-    required: true
-  }
+  // },
+  // time: {
+  //   type: Date,
+  //   required : true
+  // },
+  // reminderNumber: {
+  //   type: String,
+  //   required:true
+  // },
+  // notification: {
+  //   type: Number,
+  //   required: true
+  // },
+  // notificationLabel: {
+  //   type: String,
+  //   required: true
+  
+  //  pets: [{ type: Schema.Types.ObjectId, ref: "Pets"}]
 }); 
 
 reminderSchema.methods.requiresNotification = function(date) {

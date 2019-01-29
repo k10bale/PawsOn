@@ -1,14 +1,14 @@
 const router = require("express").Router();
-const reminderController = require("../../reminderControllers/Controller");
+const reminderController = require("../../controllers/reminderController");
 const mongoose = require("mongoose");
 // const Schema = mongoose.Schema;
 
-// Matches with "/api/pets"
+// Matches with "/api/reminder"
 router.route("/")
   .get(reminderController.findAll)
-  .post(reminderControllerr.create);
+  .post(reminderController.create);
 
-// Matches with "/api/pets/:id"
+// Matches with "/api/reminders/:id"
 router
   .route("/:id")
   .get(reminderController.findById)
