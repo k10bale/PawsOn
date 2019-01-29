@@ -11,12 +11,18 @@ export default {
   getPets: function() {
     return axios.get("/api/pets");
   },
+  getReminder: function() {
+    return axios.get("/api/reminder");
+  },
   // Gets the book with the given id
   getOwnerId: function(id) {
     return axios.get("/api/owner/" + id);
   },
   getPetsId: function(id) {
     return axios.get("/api/pets/" + id);
+  },
+  getReminderId: function(id) {
+    return axios.get("/api/reminder/" + id);
   },
   // Deletes the book with the given id
   deleteOwner: function(id) {
@@ -25,11 +31,17 @@ export default {
   deletePets: function(id) {
     return axios.delete("/api/pets/" + id);
   },
+  deleteReminder: function(id) {
+    return axios.delete("/api/reminder/" + id);
+  },
   // Saves a book to the database
   saveOwner: function(ownerData) {
     return axios.post("/api/owner/", ownerData);
   },
   savePet: function(petData, id) {
     return axios.post("/api/pets/" + id, petData);
+  },
+  saveReminder: function(reminderData, id) {
+    return axios.post("/api/reminder/" + id, reminderData);
   }
 };

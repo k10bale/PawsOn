@@ -4,6 +4,7 @@ import API from "../utils/API";
 
 class ReminderList extends Component {
   state = {
+      reminder: [],
      reminderName: ""
   };
 
@@ -18,6 +19,10 @@ class ReminderList extends Component {
       [name]: value
     });
   };
+  
+componentDidMount() {
+    // this.addUser();
+  }
 
 
 addReminder = event => {
@@ -34,13 +39,19 @@ getReminder = id => {
     .catch(err => console.log(err));
 };
 
-handleInput = e => {
-  const itemText = e.target.value
-  // const currentItem = { text: itemText, key: Date.now() }
-  this.setState({
-    // currentItem,
-  })
-}
+getPet = id => {
+  API.getPet(id)
+    .then(res => this.addReminder())
+    .catch(err => console.log(err));
+};
+
+// handleInput = e => {
+//   const itemText = e.target.value
+//   // const currentItem = { text: itemText, key: Date.now() }
+//   this.setState({
+//     // currentItem,
+//   })
+// }
 
 handleFormSubmit = event => {
   // console.log(this.props.reminder._id);
@@ -49,13 +60,12 @@ handleFormSubmit = event => {
   // if (this.state.petName && this.state.image) {
     API.saveReminder({
       reminderName: this.state.reminderName,
-      // image: this.state.image,
-      // species: this.state.species,
-      // birthday: this.state.birthday
+
       
-    },this.props.pet._id )
+    // },this.props.pets._id )
+    },)
       .then(res => this.addReminder())
-      .then (()=> this.props.toggle() )
+      .then (()=> this.props.toggle())
       .catch(err => console.log(err));
   
 };
