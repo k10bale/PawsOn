@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { Jumbotron, Button, Col, Row } from 'reactstrap';
-import OwnerModal from "../OwnerModal";
-import Owner from "../Owner";
-import Login from "../../pages/Login";
-import "./style.css";
+import OwnerModal from "../components/OwnerModal";
+import Owner from "../components/Owner";
+import Login from "../components/Login";
+// import "./style.css";
+
+class Landing extends Component {
+  constructor(props) {
+    super(props);
+  
+
+};
 
 
-
-
-
-function Landing () {
+render () {
 return (
-
-    <div >
-        <div>
+  
+    
+      <div>
       <Jumbotron>
         <Row>
         <Col>
@@ -23,19 +27,19 @@ return (
         {/* <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> */}
         <p className="lead">
           {/* <Button color="primary" href= "/signup/">Sign Up</Button> */}
-          <OwnerModal> {Owner} </OwnerModal>
+          <OwnerModal/>  
         </p>
         </Col>
         <Col>
-        <Login></Login>
+        <Login history={this.props.history}/>
         </Col>
         </Row>
       </Jumbotron>
     </div>
-    </div>
+  
   );
 };
-
+}
 
 
 
