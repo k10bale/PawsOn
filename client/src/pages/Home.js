@@ -85,8 +85,9 @@ render() {
             </Col>
             </Row>
             <Row>
-            <Col size="md-12" style=" display: flex;
-            flex-wrap: wrap;">
+            <div className = "petWrapper"> 
+
+            
               
                  {this.state.owner.pets.map(pet => (
                   <PetCard petName= {pet.petName }/>
@@ -98,7 +99,7 @@ render() {
             {/* <button onClick = {this.addPet}>Add Pet</button> */}
             <PetModal owner={this.state.owner} />
           
-          </Col>
+          </div>
         </Row>
         {/* {this.state.pets && <Pet owner ={this.state.owner}/>}  */}
         <div>

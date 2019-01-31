@@ -41,3 +41,7 @@
    
     background: rgba(204, 204, 204, 0.5);
   }
+  .petWrapper{
+    display: flex;
+    flex-wrap: wrap;
+  }

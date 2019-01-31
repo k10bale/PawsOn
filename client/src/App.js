@@ -6,7 +6,7 @@ import NoMatch from "./pages/NoMatch";
 import Reminders from "./pages/Reminders"
 import Nav from "./components/Nav";
 
-import Pet from "./pages/Pet";
+import Pet from "./components/Pet";
 import Landing from "./pages/Landing";
 import "./App.css";
 
