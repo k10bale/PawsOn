@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./style.css";
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Container, Input} from 'reactstrap';
 
 // import { Link } from "react-router-dom";
-// import { Col, Container } from "../components/Grid";
+import { Col } from "../Grid";
 import sampleImage from "../../images/Lucy.jpg"
 import API from "../../utils/API";
 import axios from "axios";
@@ -113,7 +113,9 @@ handleFormSubmit = event => {
      
      
   // <Form>
-  <div>
+  <Container>
+  <div className="petForm">
+    <Col size="md-4">
     <FormGroup>
         
           <Input className="form-control"
@@ -164,7 +166,9 @@ handleFormSubmit = event => {
           </FormGroup>
           <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
       {/* </Form> */}
+      </Col>
       </div>
+      </Container>
     
   
     

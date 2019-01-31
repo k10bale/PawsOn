@@ -80,8 +80,11 @@ render() {
             </Jumbotron>
             <Row>
           <Col size="md-2">
+            <div className="petsHeader">
             <h1>My Pets:
             </h1>
+            </div>
+            <PetModal owner={this.state.owner} />
             </Col>
             </Row>
             <Row>
@@ -97,7 +100,7 @@ render() {
 
            
             {/* <button onClick = {this.addPet}>Add Pet</button> */}
-            <PetModal owner={this.state.owner} />
+           
           
           </div>
         </Row>

@@ -45,3 +45,15 @@
     display: flex;
     flex-wrap: wrap;
   }
+
+  .petForm{
+    padding: 20px;
+  }
+
+  .petsHeader{
+   color: white;
+  }
+
+  .reminderList{
+    padding:20px;
+  }

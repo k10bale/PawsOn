@@ -176,7 +176,7 @@ class Login extends Component {
                 type="email"
                 name="email"
                 id="exampleEmail"
-                placeholder="myemail@email.com"
+                placeholder="email"
                 value={ email }
                 valid={ this.state.validate.emailState === 'has-success' }
                 invalid={ this.state.validate.emailState === 'has-danger' }

@@ -35,7 +35,8 @@ class ModalExample extends React.Component {
 
   render() {
     return (
-      <Link color="danger" to={{ pathname: '/addpet', param: this.props.owner._id  }} >Add Pet</Link>
+      <Button color="danger">
+      <Link  to={{ pathname: '/addpet', param: this.props.owner._id  }} >Add Pet</Link> </Button>
       // <div>
 
       //     {' '}
