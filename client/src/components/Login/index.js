@@ -4,11 +4,11 @@ import {
   FormGroup, Label, Input,
   Button, FormText, FormFeedback,
 } from 'reactstrap';
-import OwnerModal from "../OwnerModal";
+// import OwnerModal from "../OwnerModal";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Owner from "../Owner";
+// import Owner from "../Owner";
 // import ReminderList from '../components/Reminders';
 // import {Link} from "react-router-dom";
 // import "./style.css";
@@ -216,7 +216,7 @@ class Login extends Component {
           {/* <Link to="/signup/"> */}
           {/* <Button href= "/signup/">Sign Up</Button>  */}
           {/* </Link> */}
-          <OwnerModal> {Owner} </OwnerModal>
+          {/* <OwnerModal> {Owner} </OwnerModal> */}
       </Form>
   
       </Container>
