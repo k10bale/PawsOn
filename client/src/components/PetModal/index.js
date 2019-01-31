@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css"
@@ -35,19 +35,20 @@ class ModalExample extends React.Component {
 
   render() {
     return (
-      <div>
+      <Link color="danger" to={{ pathname: '/addpet', param: this.props.owner._id  }} >Add Pet</Link>
+      // <div>
 
-          {' '}
-        <Button color="danger" onClick={this.toggle}>Add Pet</Button>
+      //     {' '}
+      //   <Button color="danger" onClick={this.toggle}>Add Pet</Button>
       
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} backdrop={this.state.backdrop}>
-          <ModalHeader toggle={this.toggle}title>Add Pet</ModalHeader>
-          <ModalBody>
-            <Pet owner={this.props.owner} toggle= {this.toggle} />
-          </ModalBody>
+      //   <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} backdrop={this.state.backdrop}>
+      //     <ModalHeader toggle={this.toggle}title>Add Pet</ModalHeader>
+      //     <ModalBody>
+      //       <Pet owner={this.props.owner} toggle= {this.toggle} />
+      //     </ModalBody>
    
-        </Modal>
-      </div>
+      //   </Modal>
+      // </div>
     );
   }
 }

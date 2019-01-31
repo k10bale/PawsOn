@@ -20,6 +20,11 @@ import {
   Nav,
  } from 'reactstrap';
  import "./style.css"
+ import { library } from '@fortawesome/fontawesome-svg-core';
+ import { faPaw } from '@fortawesome/free-solid-svg-icons';
+ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+ 
+ library.add(faPaw);
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -39,7 +44,13 @@ export default class Example extends React.Component {
     return (
       <div>
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">PawsOn</NavbarBrand>
+          <NavbarBrand href="/">  
+           <FontAwesomeIcon
+                icon="paw"
+                color="#f46242"
+                size="lg"
+                  />
+                   PawsOn</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             {/* <Nav className="ml-auto" navbar>

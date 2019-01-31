@@ -85,7 +85,8 @@ render() {
             </Col>
             </Row>
             <Row>
-            <Col size="md-8">
+            <Col size="md-12" style=" display: flex;
+            flex-wrap: wrap;">
               
                  {this.state.owner.pets.map(pet => (
                   <PetCard petName= {pet.petName }/>

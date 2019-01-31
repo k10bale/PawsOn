@@ -4,20 +4,20 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 // import { Link } from "react-router-dom";
 // import { Col, Container } from "../components/Grid";
-
+import sampleImage from "../../images/Lucy.jpg"
 import API from "../../utils/API";
-import ImageUpload from "../ImageUpload/image_uplaod";
+import axios from "axios";
+// import ImageUpload from "../ImageUpload/image_uplaod";
 // import DeleteBtn from "../components/DeleteBtn";
 // import { List, ListItem } from "../components/List";
 
 class Pet extends Component {
   state = {
-        pets: [],
-        petName: "",
-        image: "",
-        species: "",
-        birthday:"",
-        reminders: []
+    petName: "",
+    image: sampleImage,
+    imageUrl: '',
+    species: "",
+    birthday: "",
   };
 
 
@@ -50,26 +50,61 @@ getPets = id => {
     .catch(err => console.log(err));
 };
 
+imageUplaod = (image) => {
+  let formData = new FormData();
+  formData.append('file', image);
+  formData.append('upload_preset', 'y5ewfnvb');
+   axios({
+    method: 'POST',
+    url: 'https://api.cloudinary.com/v1_1/oti4me/image/upload',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: formData
+  })
+  .then((image) => {
+    this.setState({
+      imageUrl: image.data.url
+    })
+  }).catch((err)=> {
+    console.log(err)
+  })
+}
+handleImageChange = (event) =>{
+  event.preventDefault();
+  // return console.log(event.target.files, 'files')
+  if (event.target.files && event.target.files[0]) {
+    this.setState({
+      image: event.target.files[0]
+    });
 
+  } else {
+    this.setState({ image: sampleImage });
+  }
+}
 
-  handleFormSubmit = event => {
-    console.log(this.props.owner._id);
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-    event.preventDefault();
-    if (this.state.petName && this.state.image) {
-      API.savePet({
-        petName: this.state.petName,
-        image: this.state.image,
-        species: this.state.species,
-        birthday: this.state.birthday
-        
-      },this.props.owner._id )
-        .then(res => this.addPet())
-        .then (()=> this.props.toggle() )
-        .catch(err => console.log(err));
-    }
-  };
+handleFormSubmit = event => {
+  // Preventing the default behavior of the form submit (which is to refresh the page)
+  event.preventDefault();
+  this.imageUplaod(this.state.image)
 
+    // return console.log(this.state.imageUrl)
+  if (this.state.petName && this.state.image) {
+    API.savePet({
+      petName: this.state.petName,
+      image: this.state.imageUrl,
+      species: this.state.species,
+      birthday: this.state.birthday
+
+    }, this.props.location.param)
+    .then(() => {
+      console.log(this.props.location.param, 'there')
+      const { param } = this.props.location
+       this.props.history.push(`/owner/${param}`)
+    })
+      .catch(err => console.log(err));
+  }
+};
 
 
   render() {
@@ -89,16 +124,16 @@ getPets = id => {
             placeholder="Pet Name"
           />
         </FormGroup>
-        <ImageUpload/>
+        {/* <ImageUpload/> */}
         <FormGroup>
-          <Input className="form-control"
-            value={this.state.image}
-            name="image"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Upload Image"
-          />
-          </FormGroup>
+         <Input className="form-control"
+           name="image"
+           onChange={this.handleImageChange}
+           type="file"
+            multiple
+           placeholder="Upload Image"
+         />
+       </FormGroup>
           <FormGroup>
           <Input className="form-control"
             value={this.state.species}
