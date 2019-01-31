@@ -38,10 +38,22 @@
   }
 
   .jumbotron{
-   
+    margin-top: 10px;
     background: rgba(204, 204, 204, 0.5);
   }
   .petWrapper{
     display: flex;
     flex-wrap: wrap;
+  }
+
+  .petForm{
+    padding: 20px;
+  }
+
+  .petsHeader{
+   color: white;
+  }
+
+  .reminderList{
+    padding:20px;
   }

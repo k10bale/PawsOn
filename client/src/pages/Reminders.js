@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Form, Input, Button} from "reactstrap"
 import API from "../utils/API";
-import { Container } from '../components/Grid';
+import { Container, Col } from '../components/Grid';
 // import { Col, Row } from "../components/Grid";
 // import { List, ListItem } from "../components/List";
 // import { Link } from "react-router-dom";
@@ -76,6 +76,7 @@ const {
   render() {
     return (
       <Container>
+        <Col size= "md-4">
         <div className="reminderList">
         
           <Form onSubmit={this.props.addReminder}>
@@ -130,7 +131,7 @@ const {
               <h3>No Results to Display</h3>
             )}
           </Col> */}
-        
+        </Col>
         </Container>
      
     )
