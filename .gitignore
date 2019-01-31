@@ -1,4 +1,7 @@
 node_modules
+<<<<<<< HEAD
 .DS_Store
 build
+=======
+>>>>>>> ebc9d164de0cad17a597d50aa438b622b78f9952
 client/node_modules

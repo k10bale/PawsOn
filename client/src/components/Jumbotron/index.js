@@ -1,14 +1,15 @@
-import React from "react";
+import React from 'react';
+import { Jumbotron, Button } from 'reactstrap';
+import "./style.css"
 
-function Jumbotron({ children }) {
+const Example = ({children}) => {
   return (
-    <div
-      style={{ height: 300, clear: "both", paddingTop: 120, textAlign: "center" }}
-      className="jumbotron"
-    >
+    <div>
+      <Jumbotron>
       {children}
+      </Jumbotron>
     </div>
   );
-}
+};
 
-export default Jumbotron;
+export default Example;

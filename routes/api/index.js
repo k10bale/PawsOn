@@ -1,7 +1,17 @@
 const router = require("express").Router();
-const bookRoutes = require("./books");
+const ownerRoutes = require("./owner");
+const petRoutes = require("./pets");
+const reminderRoutes = require("./reminder");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-// Book routes
-router.use("/books", bookRoutes);
+// yarn routes
+router.use("/owner", ownerRoutes);
+router.use("/pets", petRoutes);
+router.use("/reminders", reminderRoutes);
+// do I need this?
+// router.use("/userSession", userRoutes)
+
+
 
 module.exports = router;
