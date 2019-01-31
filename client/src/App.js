@@ -7,6 +7,7 @@ import Reminders from "./pages/Reminders"
 import Nav from "./components/Nav";
 import Login from "./pages/Login";
 import Pet from "./pages/Pet";
+import Landing from "./components/Landing";
 import "./App.css";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Nav />
         <Switch>
          <Route exact path="/" component={Login} />
+         <Route exact path="/landing" component={Landing} />
           <Route exact path="/owner/:id" component={Home} /> 
           <Route exact path="/signup" component={Owner} />
           <Route exact path="/addpet" component={Pet} />

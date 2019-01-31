@@ -36,7 +36,7 @@ class ModalExample extends React.Component {
       <div>
 
           {' '}
-        <Button color="danger" onClick={this.toggle}>Sign Up</Button>
+        <Button color="primary" onClick={this.toggle}>Sign Up</Button>
       
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} backdrop={this.state.backdrop}>
           <ModalHeader toggle={this.toggle}title>Sign Up </ModalHeader>
@@ -44,7 +44,7 @@ class ModalExample extends React.Component {
             <Owner path={this.props.history} toggle= {this.toggle}/>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+            <Button color="primary" onClick={this.toggle}>Submit</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>

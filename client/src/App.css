@@ -9,7 +9,13 @@
     margin-right: auto;
     width: 600px;
     margin-top: 100px;
+
   }
+
+  /* .landing{
+    background-image: url(../src/images/Beau2.jpeg);
+    background-size: cover;
+  } */
 
   .form {
     padding: 1em;
@@ -29,4 +35,9 @@
     margin:7px
    
   
+  }
+
+  .jumbotron{
+   
+    background: rgba(204, 204, 204, 0.5);
   }

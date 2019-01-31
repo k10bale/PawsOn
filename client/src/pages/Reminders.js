@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import {Form, Input, Button} from "reactstrap"
 import API from "../utils/API";
+import { Container } from '../components/Grid';
+// import { Col, Row } from "../components/Grid";
+// import { List, ListItem } from "../components/List";
+// import { Link } from "react-router-dom";
 
 class ReminderList extends Component {
   state = {
@@ -71,6 +75,7 @@ const {
 
   render() {
     return (
+      <Container>
         <div className="reminderList">
         
           <Form onSubmit={this.props.addReminder}>
@@ -104,6 +109,29 @@ const {
       <Button color="primary" onClick={this.handleFormSubmit}>Add Reminder</Button>
           </Form>
         </div>
+        {/* <Col size="md-6 sm-12">
+          
+            {this.props.reminder.length ? (
+              <List>
+                {this.state.reminders.map(reminder => (
+                  <ListItem key={reminder._id}>
+                    <Link to={"/owners/" + reminder._id}>
+                      <strong>
+                        {reminder.reminderName} {reminder.time} 
+                           
+                      
+                      </strong>
+                    </Link>
+                  
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <h3>No Results to Display</h3>
+            )}
+          </Col> */}
+        
+        </Container>
      
     )
   }
