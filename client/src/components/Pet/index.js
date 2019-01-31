@@ -86,7 +86,7 @@ handleImageChange = (event) =>{
 handleFormSubmit = event => {
   // Preventing the default behavior of the form submit (which is to refresh the page)
   event.preventDefault();
-  this.imageUplaod(this.state.image)
+  
 
     // return console.log(this.state.imageUrl)
   if (this.state.petName && this.state.image) {
@@ -130,7 +130,7 @@ handleFormSubmit = event => {
         <FormGroup>
          <Input className="form-control"
            name="image"
-           onChange={this.handleImageChange}
+           onChange={()=>this.imageUplaod(this.state.image)}
            type="file"
             multiple
            placeholder="Upload Image"

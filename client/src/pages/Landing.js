@@ -17,7 +17,7 @@ render () {
 return (
   
     
-      <div>
+      <div className="landingWrapper">
       <Jumbotron>
         <Row>
         <Col>
